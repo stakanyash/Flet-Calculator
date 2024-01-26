@@ -1,6 +1,7 @@
 # Flet Calculator by ksh1vn alpha version 0.1 for Android
 
-# TODO: Add support input from keyboard (for Windows version)
+# TODO: Make font size in buttons bigger
+# TODO: Center text in text field
 
 # Flet import
 
@@ -9,8 +10,8 @@ import flet as ft
 # Create page
 
 def main(page: ft.page):
-    page.title = "Калькулятор"
-    page.description = "Flet Calculator"
+    page.title = "Flet Calculator"
+    page.description = "Flet Calculator v0.1"
     page.bgcolor = "#1A1C1E"
 
     # Make buttons functional
