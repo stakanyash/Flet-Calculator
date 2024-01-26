@@ -10,7 +10,8 @@ Simple calculator based on flet for Windows and Android
 ## Screenshots:
 
 **Android version**
-> ![Android](https://github.com/ksh1vn/Flet-Calculator/assets/60093741/1b1fa2a9-84a2-4005-a244-ed4c8297c22f)
+> ![Android](https://github.com/ksh1vn/Flet-Calculator/assets/60093741/8d60637f-6021-41e1-badc-01e54de0b4fa)
+
 
 **Windows version**
 
