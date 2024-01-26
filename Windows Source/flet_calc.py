@@ -23,54 +23,54 @@ def main(page: ft.page):
         data = e.control.data
 
         if data in ["1","2","3","4","5","6","7","8","9","0",".","+","-","*","/","(",")"]:
-            txt.value = str(txt.value) + str(data)
+            mainfield.value = str(mainfield.value) + str(data)
             page.update()
 
     # Equal button functional
 
         if data =="=":
             try:
-                txt.value = str(eval(txt.value))
+                mainfield.value = str(eval(mainfield.value))
             except ZeroDivisionError:
                 messagebox.showerror("Error", "Division by zero.")
-                txt.value = ""
+                mainfield.value = ""
             except SyntaxError:
                 messagebox.showerror("Error", "Invalid syntax.")
-                txt.value = ""
+                mainfield.value = ""
             page.update()
 
     # CLS button functional
 
         if data=="e":
             try:
-                st = list(txt.value)
+                st = list(mainfield.value)
                 st.pop()
-                txt.value = "".join(map(str,st))
+                mainfield.value = "".join(map(str,st))
             except IndexError:
                 messagebox.showerror("Error", "Sequence index out of range. Don't try to clear empty text field.")
-                txt.value = ""
+                mainfield.value = ""
             page.update()
 
     # Clear button functional
 
         if data=="C":
-            txt.value = ""
+            mainfield.value = ""
             page.update()
 
     # Create text field, set read-only, color and size
 
-    txt = ft.TextField(
+    mainfield = ft.TextField(
         read_only=True,
         border_color="#1A1C1E",
         text_style=ft.TextStyle(size=28,color="#9ECAFF", font_family="Segoe UI"),
         text_align=ft.TextAlign.RIGHT,
-        hint_text = "Enter values",
+        hint_text = "0",
         hint_style=ft.TextStyle(size=28,color="#2F3C4C", font_family="Segoe UI")
     )
 
     # Add text field to main window
 
-    page.add(txt)
+    page.add(mainfield)
 
     # Buttons
 
