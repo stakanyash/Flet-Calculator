@@ -21,6 +21,7 @@ def main(page: ft.page):
         if data in ["1","2","3","4","5","6","7","8","9","0",".","+","-","*","/","(",")"]:
             txt.value = str(txt.value) + str(data)
             page.update()
+
     # Equal button functional
 
         if data =="=":
