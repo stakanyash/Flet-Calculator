@@ -1,8 +1,11 @@
-# Flet Calculator by ksh1vn alpha version 0.5 for Android
+# Flet Calculator by ksh1vn alpha version 0.6 for Android
+
+# App interface developed for Samsung Galaxy A10. Normal work of the interface on other devices is not guaranteed.
 
 # TODO: Center text in text field (for now done with creation of empty text field before main)
+# TODO: Add menu, add white theme, add button to switch themes between black and white.
 
-# Flet import
+# Flet libs import
 
 import flet as ft
 from flet import ButtonStyle
@@ -11,7 +14,7 @@ from flet import ButtonStyle
 
 def main(page: ft.page):
     page.title = "Flet Calculator"
-    page.description = "Flet Calculator v0.5"
+    page.description = "Flet Calculator v0.6"
     page.bgcolor = "#1A1C1E"
 
     # Make buttons functional
@@ -23,15 +26,72 @@ def main(page: ft.page):
             txt.value = str(txt.value) + str(data)
             page.update()
 
+    # Zero division error alert
+            
+        def close_dlgzero(e):
+            divzero_error.open = False
+            page.update()
+
+        divzero_error = ft.AlertDialog(
+            modal=True,
+            title=ft.Text("Error"),
+            content=ft.Text("Division by zero!"),
+            actions=[
+                ft.TextButton("OK", on_click=close_dlgzero)
+            ],
+            actions_alignment=ft.MainAxisAlignment.END,
+            on_dismiss=lambda e: print("Division by zero error has occurred"),
+        )
+
+    # Syntax error alert
+
+        def close_dlgsyntax(e):
+            syntax_error.open = False
+            page.update()
+
+        syntax_error = ft.AlertDialog(
+            modal=True,
+            title=ft.Text("Error"),
+            content=ft.Text("Syntax error!"),
+            actions=[
+                ft.TextButton("OK", on_click=close_dlgsyntax)
+            ],
+            actions_alignment=ft.MainAxisAlignment.END,
+            on_dismiss=lambda e: print("Syntax error has occurred"),
+        )
+
+    # Index error alert
+
+        def close_dlgindex(e):
+            index_error.open = False
+            page.update()
+
+        index_error = ft.AlertDialog(
+            modal=True,
+            title=ft.Text("Error"),
+            content=ft.Text("Index error! Clearing an empty input field is not possible!"),
+            actions=[
+                ft.TextButton("OK", on_click=close_dlgindex)
+            ],
+            actions_alignment=ft.MainAxisAlignment.END,
+            on_dismiss=lambda e: print("Index error has occurred"),
+        )
+
     # Equal button functional
 
         if data =="=":
             try:
                 txt.value = str(eval(txt.value))
             except ZeroDivisionError:
-                txt.value = "Division by zero"
+                page.dialog = divzero_error
+                divzero_error.open = True
+                txt.value = ""
+                page.update() 
             except SyntaxError:
-                txt.value = "Invalid syntax"
+                page.dialog = syntax_error
+                syntax_error.open = True
+                txt.value = ""
+                page.update() 
             page.update()
 
     # CLS button functional
@@ -43,7 +103,10 @@ def main(page: ft.page):
                 txt.value = "".join(map(str,st))
                 page.update()
             except IndexError:
-                txt.value = "Index error"
+                page.dialog = index_error
+                index_error.open = True
+                txt.value = ""
+                page.update() 
             page.update()
 
     # Clear button functional
@@ -79,124 +142,44 @@ def main(page: ft.page):
 
     # Buttons
 
-    cls_btn = ft.TextButton(
+    clear_button = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="CLS", size=30)],
+                [ft.Text(value="C", size=30)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="e", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="C", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
     
-    left_pbtn = ft.TextButton(
+    zero_button = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="(", size=30)],
+                [ft.Text(value="0", size=30)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="(", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="0", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
-    right_pbtn = ft.TextButton(
+    dot_button = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value=")", size=30)],
+                [ft.Text(value=".", size=30)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data=")", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data=".", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
     
-    division_btn = ft.TextButton(
+    equal_button = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="/", size=30)],
+                [ft.Text(value="=", size=30)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="/", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
-    )
-
-    seven_btn = ft.TextButton(
-        content=ft.Container(
-            content=ft.Column(
-                [ft.Text(value="7", size=30)],
-                alignment=ft.MainAxisAlignment.CENTER
-            )
-        ),
-        data="7", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
-    )
-    
-    eight_btn = ft.TextButton(
-        content=ft.Container(
-            content=ft.Column(
-                [ft.Text(value="8", size=30)],
-                alignment=ft.MainAxisAlignment.CENTER
-            )
-        ),
-        data="8", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
-    )
-
-    nine_btn = ft.TextButton(
-        content=ft.Container(
-            content=ft.Column(
-                [ft.Text(value="9", size=30)],
-                alignment=ft.MainAxisAlignment.CENTER
-            )
-        ),
-        data="9", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
-    )
-    
-    multi_btn = ft.TextButton(
-        content=ft.Container(
-            content=ft.Column(
-                [ft.Text(value="X", size=30)],
-                alignment=ft.MainAxisAlignment.CENTER
-            )
-        ),
-        data="*", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
-    )
-
-    four_btn = ft.TextButton(
-        content=ft.Container(
-            content=ft.Column(
-                [ft.Text(value="4", size=30)],
-                alignment=ft.MainAxisAlignment.CENTER
-            )
-        ),
-        data="4", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
-    )
-    
-    five_btn = ft.TextButton(
-        content=ft.Container(
-            content=ft.Column(
-                [ft.Text(value="5", size=30)],
-                alignment=ft.MainAxisAlignment.CENTER
-            )
-        ),
-        data="5", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
-    )
-
-    six_btn = ft.TextButton(
-        content=ft.Container(
-            content=ft.Column(
-                [ft.Text(value="6", size=30)],
-                alignment=ft.MainAxisAlignment.CENTER
-            )
-        ),
-        data="6", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
-    )
-    
-    minus_btn = ft.TextButton(
-        content=ft.Container(
-            content=ft.Column(
-                [ft.Text(value="-", size=30)],
-                alignment=ft.MainAxisAlignment.CENTER
-            )
-        ),
-        data="-", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="=", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
     one_btn = ft.TextButton(
@@ -239,44 +222,124 @@ def main(page: ft.page):
         data="+", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
-    clear_button = ft.TextButton(
+    four_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="C", size=30)],
+                [ft.Text(value="4", size=30)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="C", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="4", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
     
-    zero_button = ft.TextButton(
+    five_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="0", size=30)],
+                [ft.Text(value="5", size=30)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="0", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="5", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
-    dot_button = ft.TextButton(
+    six_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value=".", size=30)],
+                [ft.Text(value="6", size=30)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data=".", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="6", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
     
-    equal_button = ft.TextButton(
+    minus_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="=", size=30)],
+                [ft.Text(value="-", size=30)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="=", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="-", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+    )
+
+    seven_btn = ft.TextButton(
+        content=ft.Container(
+            content=ft.Column(
+                [ft.Text(value="7", size=30)],
+                alignment=ft.MainAxisAlignment.CENTER
+            )
+        ),
+        data="7", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+    )
+    
+    eight_btn = ft.TextButton(
+        content=ft.Container(
+            content=ft.Column(
+                [ft.Text(value="8", size=30)],
+                alignment=ft.MainAxisAlignment.CENTER
+            )
+        ),
+        data="8", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+    )
+
+    nine_btn = ft.TextButton(
+        content=ft.Container(
+            content=ft.Column(
+                [ft.Text(value="9", size=30)],
+                alignment=ft.MainAxisAlignment.CENTER
+            )
+        ),
+        data="9", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+    )
+    
+    multi_btn = ft.TextButton(
+        content=ft.Container(
+            content=ft.Column(
+                [ft.Text(value="X", size=30)],
+                alignment=ft.MainAxisAlignment.CENTER
+            )
+        ),
+        data="*", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+    )
+
+    cls_btn = ft.TextButton(
+        content=ft.Container(
+            content=ft.Column(
+                [ft.Text(value="CLS", size=30)],
+                alignment=ft.MainAxisAlignment.CENTER
+            )
+        ),
+        data="e", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+    )
+    
+    left_pbtn = ft.TextButton(
+        content=ft.Container(
+            content=ft.Column(
+                [ft.Text(value="(", size=30)],
+                alignment=ft.MainAxisAlignment.CENTER
+            )
+        ),
+        data="(", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+    )
+
+    right_pbtn = ft.TextButton(
+        content=ft.Container(
+            content=ft.Column(
+                [ft.Text(value=")", size=30)],
+                alignment=ft.MainAxisAlignment.CENTER
+            )
+        ),
+        data=")", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+    )
+    
+    division_btn = ft.TextButton(
+        content=ft.Container(
+            content=ft.Column(
+                [ft.Text(value="/", size=30)],
+                alignment=ft.MainAxisAlignment.CENTER
+            )
+        ),
+        data="/", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
     # Make rows for buttons and set aligment
