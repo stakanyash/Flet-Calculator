@@ -8,7 +8,6 @@
 # Flet libs import
 
 import flet as ft
-from flet import ButtonStyle
 
 # Create page
 
