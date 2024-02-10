@@ -1,20 +1,18 @@
-# Flet Calculator by ksh1vn alpha version 0.6 for Android
+# Flet Calculator by ksh1vn alpha version 0.7 for Android
 
 # App interface developed for Samsung Galaxy A10. Normal work of the interface on other devices is not guaranteed.
 
 # TODO: Center text in text field (for now done with creation of empty text field before main)
-# TODO: Add menu, add white theme, add button to switch themes between black and white.
 
 # Flet libs import
 
 import flet as ft
-from flet import *
 
 # Create page
 
 def main(page: ft.page):
     page.title = "Flet Calculator"
-    page.description = "Flet Calculator v0.6"
+    page.description = "Flet Calculator v0.7"
     page.theme_mode = "dark"
 
     def nightbtn_clicked(e):
@@ -27,7 +25,7 @@ def main(page: ft.page):
         txt.text_style = ft.TextStyle(size=65,color="#9ECAFF") if page.theme_mode=="dark" else ft.TextStyle(size=65,color="#000000")
         txt.hint_style = ft.TextStyle(size=65,color="#2F3C4C") if page.theme_mode=="dark" else ft.TextStyle(size=65,color="#e1e1e2")
 
-        # Icon of theme button change
+        # Icon of theme button and color change
 
         theme_btn.icon = ft.icons.SUNNY if page.theme_mode=="dark" else ft.icons.DARK_MODE_OUTLINED
         theme_btn.icon_color = "#9ecaff" if page.theme_mode=="dark" else "#000000"
