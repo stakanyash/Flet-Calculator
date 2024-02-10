@@ -32,8 +32,6 @@ def main(page: ft.page):
 
         # Buttons background color change
 
-        buttons_bgcolor = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-
         buttonsbg = [
             bckspace_btn,
             left_pbtn,
@@ -57,7 +55,7 @@ def main(page: ft.page):
         ]
 
         for button in buttonsbg:
-            button.style = buttons_bgcolor
+            button.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
 
         # Buttons text color change
 
