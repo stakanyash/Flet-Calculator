@@ -12,7 +12,7 @@ import flet as ft
 
 def main(page: ft.page):
     page.title = "Flet Calculator"
-    page.description = "Flet Calculator v0.6"
+    page.description = "Flet Calculator v0.7"
     page.theme_mode = "dark"
 
     def nightbtn_clicked(e):
