@@ -30,6 +30,7 @@ def main(page: ft.page):
         # Icon of theme button change
 
         theme_btn.icon = ft.icons.SUNNY if page.theme_mode=="dark" else ft.icons.DARK_MODE_OUTLINED
+        theme_btn.icon_color = "#9ecaff" if page.theme_mode=="dark" else "#000000"
 
         # Buttons background color change
 
@@ -407,7 +408,7 @@ def main(page: ft.page):
     )
 
     theme_btn = ft.IconButton(
-        icon=ft.icons.SUNNY, on_click=nightbtn_clicked, data=0
+        icon=ft.icons.SUNNY, on_click=nightbtn_clicked, data=0, icon_color="#9ecaff"
     )
 
     # Make rows for buttons and set aligment
