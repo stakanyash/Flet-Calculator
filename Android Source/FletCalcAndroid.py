@@ -23,64 +23,80 @@ def main(page: ft.page):
         # Text field color change
 
         txt.text_style = ft.TextStyle(size=65,color="#9ECAFF") if page.theme_mode=="dark" else ft.TextStyle(size=65,color="#000000")
-        txt.hint_style = ft.TextStyle(size=65,color="#2F3C4C") if page.theme_mode=="dark" else ft.TextStyle(size=65,color="#e1e1e2")
+        txt.hint_style = ft.TextStyle(size=65,color="#2F3C4C") if page.theme_mode=="dark" else ft.TextStyle(size=65,color="#d2cec3")
 
         # Icon of theme button and color change
 
-        theme_btn.icon = ft.icons.SUNNY if page.theme_mode=="dark" else ft.icons.DARK_MODE_OUTLINED
+        theme_btn.icon = ft.icons.SUNNY if page.theme_mode=="dark" else ft.icons.DARK_MODE
         theme_btn.icon_color = "#9ecaff" if page.theme_mode=="dark" else "#000000"
 
         # Buttons background color change
 
-        bckspace_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-        left_pbtn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-        right_pbtn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-        division_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        buttonsbg = [
+            bckspace_btn,
+            left_pbtn,
+            right_pbtn,
+            division_btn,
+            seven_btn,
+            eight_btn,
+            nine_btn,
+            multi_btn,
+            four_btn,
+            five_btn,
+            six_btn,
+            minus_btn,
+            one_btn,
+            two_btn,
+            three_btn,
+            plus_btn,
+            clear_button,
+            zero_button,
+            dot_button
+        ]
 
-        seven_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-        eight_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-        nine_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-        multi_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        for button in buttonsbg:
+            button.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
 
-        four_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-        five_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-        six_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-        minus_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-
-        one_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-        two_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-        three_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-        plus_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-
-        clear_button.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-        zero_button.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-        dot_button.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
-        equal_button.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        # Buttons text color change
 
         bckspace_btn.icon_color = "#9ecaff" if page.theme_mode=="dark" else "#000000"
-        left_pbtn.content = ft.Container (content=ft.Column([ft.Text(value="(", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="(", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
-        right_pbtn.content = ft.Container (content=ft.Column([ft.Text(value=")", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value=")", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
-        division_btn.content = ft.Container (content=ft.Column([ft.Text(value="÷", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="÷", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
 
-        seven_btn.content = ft.Container (content=ft.Column([ft.Text(value="7", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="7", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
-        eight_btn.content = ft.Container (content=ft.Column([ft.Text(value="8", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="8", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
-        nine_btn.content = ft.Container (content=ft.Column([ft.Text(value="9", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="9", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
-        multi_btn.content = ft.Container (content=ft.Column([ft.Text(value="X", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="X", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        color_dict = {
+            "dark": "#9ecaff",
+            "light": "#000000"
+        }
 
-        four_btn.content = ft.Container (content=ft.Column([ft.Text(value="4", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="4", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
-        five_btn.content = ft.Container (content=ft.Column([ft.Text(value="5", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="5", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
-        six_btn.content = ft.Container (content=ft.Column([ft.Text(value="6", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="6", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
-        minus_btn.content = ft.Container (content=ft.Column([ft.Text(value="-", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="-", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        def create_text_container(value, size, color):
+            return ft.Container(
+                content=ft.Column([
+                    ft.Text(value=value, size=size, color=color)
+            ], alignment=ft.MainAxisAlignment.CENTER)
+        )
 
-        one_btn.content = ft.Container (content=ft.Column([ft.Text(value="1", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="1", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
-        two_btn.content = ft.Container (content=ft.Column([ft.Text(value="2", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="2", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
-        three_btn.content = ft.Container (content=ft.Column([ft.Text(value="3", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="3", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
-        plus_btn.content = ft.Container (content=ft.Column([ft.Text(value="+", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="+", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        left_pbtn.content = create_text_container("(", 30, color_dict[page.theme_mode])
+        right_pbtn.content = create_text_container(")", 30, color_dict[page.theme_mode])
+        division_btn.content = create_text_container("÷", 45, color_dict[page.theme_mode])
 
-        clear_button.content = ft.Container (content=ft.Column([ft.Text(value="C", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="C", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
-        zero_button.content = ft.Container (content=ft.Column([ft.Text(value="0", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="0", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
-        dot_button.content = ft.Container (content=ft.Column([ft.Text(value=".", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value=".", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
-        equal_button.content = ft.Container (content=ft.Column([ft.Text(value="=", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="=", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        buttonstext = [
+            (seven_btn, "7", 30),
+            (eight_btn, "8", 30),
+            (nine_btn, "9", 30),
+            (multi_btn, "×", 45),
+            (four_btn, "4", 30),
+            (five_btn, "5", 30),
+            (six_btn, "6", 30),
+            (minus_btn, "−", 45),
+            (one_btn, "1", 30),
+            (two_btn, "2", 30),
+            (three_btn, "3", 30),
+            (plus_btn, "+", 45),
+            (clear_button, "C", 30),
+            (zero_button, "0", 30),
+            (dot_button, ".", 45)
+        ]
+
+        for button, value, size in buttonstext:
+            button.content = create_text_container(value, size, color_dict[page.theme_mode])
 
         # Update page
  
@@ -234,7 +250,7 @@ def main(page: ft.page):
     dot_button = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value=".", size=30, color="#9ecaff")],
+                [ft.Text(value=".", size=45, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -244,11 +260,11 @@ def main(page: ft.page):
     equal_button = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="=", size=30, color="#9ecaff")],
+                [ft.Text(value="=", size=45, color="#ffffff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="=", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="=", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#00ba00")
     )
 
     one_btn = ft.TextButton(
@@ -284,7 +300,7 @@ def main(page: ft.page):
     plus_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="+", size=30, color="#9ecaff")],
+                [ft.Text(value="+", size=45, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -324,7 +340,7 @@ def main(page: ft.page):
     minus_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="-", size=30, color="#9ecaff")],
+                [ft.Text(value="−", size=45, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -364,7 +380,7 @@ def main(page: ft.page):
     multi_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="X", size=30, color="#9ecaff")],
+                [ft.Text(value="×", size=45, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -372,7 +388,7 @@ def main(page: ft.page):
     )
 
     bckspace_btn = ft.IconButton(
-        icon=ft.icons.BACKSPACE_OUTLINED, on_click=text_enter, data="e", height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        icon=ft.icons.BACKSPACE_OUTLINED, on_click=text_enter, data="e", height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429"), icon_color="#9ecaff"
     )
     
     left_pbtn = ft.TextButton(
@@ -398,7 +414,7 @@ def main(page: ft.page):
     division_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="÷", size=30, color="#9ecaff")],
+                [ft.Text(value="÷", size=45, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
