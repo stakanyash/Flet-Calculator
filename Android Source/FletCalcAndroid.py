@@ -3,18 +3,55 @@
 # App interface developed for Samsung Galaxy A10. Normal work of the interface on other devices is not guaranteed.
 
 # TODO: Center text in text field (for now done with creation of empty text field before main)
-# TODO: Add menu, add white theme, add button to switch themes between black and white.
 
 # Flet libs import
 
 import flet as ft
+from flet import *
 
 # Create page
 
 def main(page: ft.page):
     page.title = "Flet Calculator"
     page.description = "Flet Calculator v0.6"
-    page.bgcolor = "#1A1C1E"
+    page.theme_mode = "dark"
+
+    def nightbtn_clicked(e):
+        page.theme_mode = "light" if page.theme_mode =="dark" else "dark"
+        page.update()
+
+        txt.text_style = ft.TextStyle(size=65,color="#9ECAFF") if page.theme_mode=="dark" else ft.TextStyle(size=65,color="#000000")
+        txt.hint_style = ft.TextStyle(size=65,color="#2F3C4C") if page.theme_mode=="dark" else ft.TextStyle(size=65,color="#e1e1e2")
+
+        nightmode_btn.icon = ft.icons.SUNNY if page.theme_mode=="dark" else ft.icons.DARK_MODE
+
+        bckspace_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        left_pbtn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        right_pbtn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        division_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+
+        seven_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        eight_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        nine_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        multi_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+
+        four_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        five_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        six_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        minus_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+
+        one_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        two_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        three_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        plus_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+
+        clear_button.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        zero_button.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        dot_button.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+        equal_button.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+
+ 
+        page.update()
 
     # Make buttons functional
 
@@ -148,7 +185,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="C", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="C", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
     
     zero_button = ft.TextButton(
@@ -158,7 +195,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="0", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="0", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
     dot_button = ft.TextButton(
@@ -168,7 +205,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data=".", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data=".", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
     
     equal_button = ft.TextButton(
@@ -178,7 +215,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="=", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="=", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
     one_btn = ft.TextButton(
@@ -188,7 +225,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="1", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="1", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
     
     two_btn = ft.TextButton(
@@ -198,7 +235,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="2", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="2", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
     three_btn = ft.TextButton(
@@ -208,7 +245,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="3", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="3", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
     
     plus_btn = ft.TextButton(
@@ -218,7 +255,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="+", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="+", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
     four_btn = ft.TextButton(
@@ -228,7 +265,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="4", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="4", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
     
     five_btn = ft.TextButton(
@@ -238,7 +275,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="5", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="5", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
     six_btn = ft.TextButton(
@@ -248,7 +285,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="6", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="6", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
     
     minus_btn = ft.TextButton(
@@ -258,7 +295,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="-", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="-", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
     seven_btn = ft.TextButton(
@@ -268,7 +305,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="7", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="7", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
     
     eight_btn = ft.TextButton(
@@ -278,7 +315,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="8", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="8", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
     nine_btn = ft.TextButton(
@@ -288,7 +325,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="9", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="9", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
     
     multi_btn = ft.TextButton(
@@ -298,17 +335,11 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="*", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="*", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
-    cls_btn = ft.TextButton(
-        content=ft.Container(
-            content=ft.Column(
-                [ft.Text(value="CLS", size=30)],
-                alignment=ft.MainAxisAlignment.CENTER
-            )
-        ),
-        data="e", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+    bckspace_btn = ft.IconButton(
+        icon=ft.icons.BACKSPACE_OUTLINED, on_click=text_enter, data="e", height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
     
     left_pbtn = ft.TextButton(
@@ -318,7 +349,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="(", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="(", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
     right_pbtn = ft.TextButton(
@@ -328,7 +359,7 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data=")", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data=")", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
     
     division_btn = ft.TextButton(
@@ -338,13 +369,17 @@ def main(page: ft.page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="/", on_click=text_enter, height=100, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+        data="/", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
+    )
+
+    nightmode_btn = ft.IconButton(
+        icon=ft.icons.SUNNY, on_click=nightbtn_clicked, data=0
     )
 
     # Make rows for buttons and set aligment
 
     row1st = ft.Row(
-        controls = [cls_btn, left_pbtn, right_pbtn, division_btn],
+        controls = [left_pbtn, right_pbtn, division_btn, bckspace_btn],
         alignment = ft.MainAxisAlignment.SPACE_AROUND
     )
 
@@ -369,7 +404,7 @@ def main(page: ft.page):
     )
 
     # Add rows to main window
-    page.add(row1st, row2nd, row3rd, row4th, row5th)
+    page.add(nightmode_btn, row1st, row2nd, row3rd, row4th, row5th)
 
 # Start application from def main
 ft.app(target=main)
