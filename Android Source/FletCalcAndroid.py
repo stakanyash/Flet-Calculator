@@ -34,7 +34,7 @@ def main(page: ft.page):
 
         buttons_bgcolor = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
 
-        buttons = [
+        buttonsbg = [
             bckspace_btn,
             left_pbtn,
             right_pbtn,
@@ -56,7 +56,7 @@ def main(page: ft.page):
             dot_button
         ]
 
-        for button in buttons:
+        for button in buttonsbg:
             button.style = buttons_bgcolor
 
         # Buttons text color change
@@ -79,7 +79,7 @@ def main(page: ft.page):
         right_pbtn.content = create_text_container(")", 30, color_dict[page.theme_mode])
         division_btn.content = create_text_container("÷", 45, color_dict[page.theme_mode])
 
-        buttons = [
+        buttonstext = [
             (seven_btn, "7", 30),
             (eight_btn, "8", 30),
             (nine_btn, "9", 30),
@@ -97,7 +97,7 @@ def main(page: ft.page):
             (dot_button, ".", 45)
         ]
 
-        for button, value, size in buttons:
+        for button, value, size in buttonstext:
             button.content = create_text_container(value, size, color_dict[page.theme_mode])
 
         # Update page
