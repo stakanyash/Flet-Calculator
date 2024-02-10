@@ -3,10 +3,12 @@
 # App interface developed for Samsung Galaxy A10. Normal work of the interface on other devices is not guaranteed.
 
 # TODO: Center text in text field (for now done with creation of empty text field before main)
+# TODO: Add menu, add white theme, add button to switch themes between black and white.
 
 # Flet libs import
 
 import flet as ft
+from flet import *
 
 # Create page
 
@@ -16,13 +18,20 @@ def main(page: ft.page):
     page.theme_mode = "dark"
 
     def nightbtn_clicked(e):
+        # Change theme
         page.theme_mode = "light" if page.theme_mode =="dark" else "dark"
         page.update()
+
+        # Text field color change
 
         txt.text_style = ft.TextStyle(size=65,color="#9ECAFF") if page.theme_mode=="dark" else ft.TextStyle(size=65,color="#000000")
         txt.hint_style = ft.TextStyle(size=65,color="#2F3C4C") if page.theme_mode=="dark" else ft.TextStyle(size=65,color="#e1e1e2")
 
-        nightmode_btn.icon = ft.icons.SUNNY if page.theme_mode=="dark" else ft.icons.DARK_MODE
+        # Icon of theme button change
+
+        theme_btn.icon = ft.icons.SUNNY if page.theme_mode=="dark" else ft.icons.DARK_MODE_OUTLINED
+
+        # Buttons background color change
 
         bckspace_btn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
         left_pbtn.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
@@ -49,6 +58,32 @@ def main(page: ft.page):
         dot_button.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
         equal_button.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
 
+        bckspace_btn.icon_color = "#9ecaff" if page.theme_mode=="dark" else "#000000"
+        left_pbtn.content = ft.Container (content=ft.Column([ft.Text(value="(", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="(", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        right_pbtn.content = ft.Container (content=ft.Column([ft.Text(value=")", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value=")", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        division_btn.content = ft.Container (content=ft.Column([ft.Text(value="÷", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="÷", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+
+        seven_btn.content = ft.Container (content=ft.Column([ft.Text(value="7", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="7", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        eight_btn.content = ft.Container (content=ft.Column([ft.Text(value="8", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="8", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        nine_btn.content = ft.Container (content=ft.Column([ft.Text(value="9", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="9", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        multi_btn.content = ft.Container (content=ft.Column([ft.Text(value="X", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="X", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+
+        four_btn.content = ft.Container (content=ft.Column([ft.Text(value="4", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="4", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        five_btn.content = ft.Container (content=ft.Column([ft.Text(value="5", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="5", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        six_btn.content = ft.Container (content=ft.Column([ft.Text(value="6", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="6", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        minus_btn.content = ft.Container (content=ft.Column([ft.Text(value="-", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="-", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+
+        one_btn.content = ft.Container (content=ft.Column([ft.Text(value="1", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="1", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        two_btn.content = ft.Container (content=ft.Column([ft.Text(value="2", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="2", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        three_btn.content = ft.Container (content=ft.Column([ft.Text(value="3", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="3", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        plus_btn.content = ft.Container (content=ft.Column([ft.Text(value="+", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="+", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+
+        clear_button.content = ft.Container (content=ft.Column([ft.Text(value="C", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="C", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        zero_button.content = ft.Container (content=ft.Column([ft.Text(value="0", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="0", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        dot_button.content = ft.Container (content=ft.Column([ft.Text(value=".", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value=".", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+        equal_button.content = ft.Container (content=ft.Column([ft.Text(value="=", size=30, color="#9ecaff")],alignment=ft.MainAxisAlignment.CENTER)) if page.theme_mode=="dark" else ft.Container (content=ft.Column([ft.Text(value="=", size=30, color="#000000")],alignment=ft.MainAxisAlignment.CENTER))
+
+        # Update page
  
         page.update()
 
@@ -180,7 +215,7 @@ def main(page: ft.page):
     clear_button = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="C", size=30)],
+                [ft.Text(value="C", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -190,7 +225,7 @@ def main(page: ft.page):
     zero_button = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="0", size=30)],
+                [ft.Text(value="0", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -200,7 +235,7 @@ def main(page: ft.page):
     dot_button = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value=".", size=30)],
+                [ft.Text(value=".", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -210,7 +245,7 @@ def main(page: ft.page):
     equal_button = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="=", size=30)],
+                [ft.Text(value="=", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -220,7 +255,7 @@ def main(page: ft.page):
     one_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="1", size=30)],
+                [ft.Text(value="1", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -230,7 +265,7 @@ def main(page: ft.page):
     two_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="2", size=30)],
+                [ft.Text(value="2", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -240,7 +275,7 @@ def main(page: ft.page):
     three_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="3", size=30)],
+                [ft.Text(value="3", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -250,7 +285,7 @@ def main(page: ft.page):
     plus_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="+", size=30)],
+                [ft.Text(value="+", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -260,7 +295,7 @@ def main(page: ft.page):
     four_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="4", size=30)],
+                [ft.Text(value="4", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -270,7 +305,7 @@ def main(page: ft.page):
     five_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="5", size=30)],
+                [ft.Text(value="5", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -280,7 +315,7 @@ def main(page: ft.page):
     six_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="6", size=30)],
+                [ft.Text(value="6", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -290,7 +325,7 @@ def main(page: ft.page):
     minus_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="-", size=30)],
+                [ft.Text(value="-", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -300,7 +335,7 @@ def main(page: ft.page):
     seven_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="7", size=30)],
+                [ft.Text(value="7", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -310,7 +345,7 @@ def main(page: ft.page):
     eight_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="8", size=30)],
+                [ft.Text(value="8", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -320,7 +355,7 @@ def main(page: ft.page):
     nine_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="9", size=30)],
+                [ft.Text(value="9", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -330,7 +365,7 @@ def main(page: ft.page):
     multi_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="X", size=30)],
+                [ft.Text(value="X", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -344,7 +379,7 @@ def main(page: ft.page):
     left_pbtn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="(", size=30)],
+                [ft.Text(value="(", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -354,7 +389,7 @@ def main(page: ft.page):
     right_pbtn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value=")", size=30)],
+                [ft.Text(value=")", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -364,14 +399,14 @@ def main(page: ft.page):
     division_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="/", size=30)],
+                [ft.Text(value="÷", size=30, color="#9ecaff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
         data="/", on_click=text_enter, height=90, width=80, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
-    nightmode_btn = ft.IconButton(
+    theme_btn = ft.IconButton(
         icon=ft.icons.SUNNY, on_click=nightbtn_clicked, data=0
     )
 
@@ -402,8 +437,8 @@ def main(page: ft.page):
         alignment = ft.MainAxisAlignment.SPACE_AROUND
     )
 
-    # Add rows to main window
-    page.add(nightmode_btn, row1st, row2nd, row3rd, row4th, row5th)
+    # Add theme mode button and rows to main window
+    page.add(theme_btn, row1st, row2nd, row3rd, row4th, row5th)
 
 # Start application from def main
 ft.app(target=main)
