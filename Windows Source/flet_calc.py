@@ -1,4 +1,4 @@
-# Flet Calculator by ksh1vn version 0.9.5
+# Flet Calculator by ksh1vn version 0.9.6
 
 # TODO: Add support input from keyboard
 
@@ -6,15 +6,103 @@
 
 import flet as ft
 
+
 # Create page
 
 def main(page: ft.page):
-    page.title = "Calculator"
+    page.title = "Flet Calculator"
     page.description = "Flet Calculator"
-    page.window_height = 550
+    page.window_height = 615
     page.window_width = 340
-    page.bgcolor = "#1A1C1E"
+    page.theme_mode = "dark"
     page.window_resizable = False
+
+    def nightbtn_clicked(e):
+        # Change theme
+        page.theme_mode = "light" if page.theme_mode =="dark" else "dark"
+        page.update()
+
+        # Text field color change
+
+        mainfield.text_style = ft.TextStyle(size=55,color="#9ECAFF") if page.theme_mode=="dark" else ft.TextStyle(size=55,color="#000000")
+        mainfield.hint_style = ft.TextStyle(size=55,color="#2F3C4C") if page.theme_mode=="dark" else ft.TextStyle(size=55,color="#d2cec3")
+
+        # Icon of theme button and color change
+
+        theme_btn.icon = ft.icons.SUNNY if page.theme_mode=="dark" else ft.icons.DARK_MODE
+        theme_btn.icon_color = "#9ecaff" if page.theme_mode=="dark" else "#000000"
+
+        # Buttons background color change
+
+        buttonsbg = [
+            bckspace_btn,
+            left_pbtn,
+            right_pbtn,
+            division_btn,
+            seven_btn,
+            eight_btn,
+            nine_btn,
+            multi_btn,
+            four_btn,
+            five_btn,
+            six_btn,
+            minus_btn,
+            one_btn,
+            two_btn,
+            three_btn,
+            plus_btn,
+            clear_button,
+            zero_button,
+            dot_button
+        ]
+
+        for button in buttonsbg:
+            button.style = ft.ButtonStyle(bgcolor="#202429") if page.theme_mode=="dark" else ft.ButtonStyle(bgcolor="#f6f6f6")
+
+        # Buttons text color change
+
+        bckspace_btn.icon_color = "#9ecaff" if page.theme_mode=="dark" else "#000000"
+
+        color_dict = {
+            "dark": "#9ecaff",
+            "light": "#000000"
+        }
+
+        def create_text_container(value, size, color):
+            return ft.Container(
+                content=ft.Column([
+                    ft.Text(value=value, size=size, color=color)
+            ], alignment=ft.MainAxisAlignment.CENTER)
+        )
+
+        left_pbtn.content = create_text_container("(", 23, color_dict[page.theme_mode])
+        right_pbtn.content = create_text_container(")", 23, color_dict[page.theme_mode])
+        division_btn.content = create_text_container("÷", 30, color_dict[page.theme_mode])
+
+        buttonstext = [
+            (seven_btn, "7", 23),
+            (eight_btn, "8", 23),
+            (nine_btn, "9", 23),
+            (multi_btn, "×", 30),
+            (four_btn, "4", 23),
+            (five_btn, "5", 23),
+            (six_btn, "6", 23),
+            (minus_btn, "−", 30),
+            (one_btn, "1", 23),
+            (two_btn, "2", 23),
+            (three_btn, "3", 23),
+            (plus_btn, "+", 30),
+            (clear_button, "C", 23),
+            (zero_button, "0", 23),
+            (dot_button, ".", 30)
+        ]
+
+        for button, value, size in buttonstext:
+            button.content = create_text_container(value, size, color_dict[page.theme_mode])
+
+        # Update page
+ 
+        page.update()
 
     # Make buttons functional
 
@@ -40,6 +128,23 @@ def main(page: ft.page):
             ],
             actions_alignment=ft.MainAxisAlignment.END,
             on_dismiss=lambda e: print("Division by zero error has occurred"),
+        )
+
+    # Zero division error alert
+            
+        def close_dlgname(e):
+            name_error.open = False
+            page.update()
+
+        name_error = ft.AlertDialog(
+            modal=True,
+            title=ft.Text("Error"),
+            content=ft.Text("Name error!"),
+            actions=[
+                ft.TextButton("OK", on_click=close_dlgname)
+            ],
+            actions_alignment=ft.MainAxisAlignment.END,
+            on_dismiss=lambda e: print("Name error has occurred"),
         )
 
     # Syntax error alert
@@ -91,6 +196,11 @@ def main(page: ft.page):
                 syntax_error.open = True
                 mainfield.value = ""
                 page.update()
+            except NameError:
+                page.dialog = name_error
+                name_error.open = True
+                mainfield.value = ""
+                page.update()
             page.update()
 
     # CLS button functional
@@ -116,12 +226,12 @@ def main(page: ft.page):
     # Create text field, set read-only, color and size
 
     mainfield = ft.TextField(
-        read_only=True,
-        border_color="#1A1C1E",
-        text_style=ft.TextStyle(size=35,color="#9ECAFF", font_family="Segoe UI"),
-        text_align=ft.TextAlign.RIGHT,
+        read_only = True,
+        border = ft.InputBorder.NONE,
+        text_style = ft.TextStyle(size=55,color="#9ECAFF"),
+        text_align = ft.TextAlign.RIGHT,
         hint_text = "0",
-        hint_style=ft.TextStyle(size=35,color="#2F3C4C", font_family="Segoe UI")
+        hint_style = ft.TextStyle(size=55,color="#2F3C4C")
     )
 
     # Add text field to main window
@@ -133,7 +243,7 @@ def main(page: ft.page):
     clear_button = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="C", size=17)],
+                [ft.Text(value="C", size=23)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -143,7 +253,7 @@ def main(page: ft.page):
     zero_button = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="0", size=17)],
+                [ft.Text(value="0", size=23)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -153,7 +263,7 @@ def main(page: ft.page):
     dot_button = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value=".", size=17)],
+                [ft.Text(value=".", size=30)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -163,17 +273,17 @@ def main(page: ft.page):
     equal_button = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="=", size=17)],
+                [ft.Text(value="=", size=30, color="#ffffff")],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
-        data="=",on_click=text_enter, height=70, width=70, style=ft.ButtonStyle(bgcolor="#202429")
+        data="=",on_click=text_enter, height=70, width=70, style=ft.ButtonStyle(bgcolor="#00ba00")
     )
 
     one_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="1", size=17)],
+                [ft.Text(value="1", size=23)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -183,7 +293,7 @@ def main(page: ft.page):
     two_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="2", size=17)],
+                [ft.Text(value="2", size=23)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -193,7 +303,7 @@ def main(page: ft.page):
     three_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="3", size=17)],
+                [ft.Text(value="3", size=23)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -203,7 +313,7 @@ def main(page: ft.page):
     plus_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="+", size=17)],
+                [ft.Text(value="+", size=30)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -213,7 +323,7 @@ def main(page: ft.page):
     four_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="4", size=17)],
+                [ft.Text(value="4", size=23)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -223,7 +333,7 @@ def main(page: ft.page):
     five_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="5", size=17)],
+                [ft.Text(value="5", size=23)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -233,7 +343,7 @@ def main(page: ft.page):
     six_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="6", size=17)],
+                [ft.Text(value="6", size=23)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -243,7 +353,7 @@ def main(page: ft.page):
     minus_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="-", size=17)],
+                [ft.Text(value="−", size=30)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -253,7 +363,7 @@ def main(page: ft.page):
     seven_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="7", size=17)],
+                [ft.Text(value="7", size=23)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -263,7 +373,7 @@ def main(page: ft.page):
     eight_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="8", size=17)],
+                [ft.Text(value="8", size=23)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -273,7 +383,7 @@ def main(page: ft.page):
     nine_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="9", size=17)],
+                [ft.Text(value="9", size=23)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -283,27 +393,21 @@ def main(page: ft.page):
     multi_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="X", size=17)],
+                [ft.Text(value="×", size=30)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
         data="*",on_click=text_enter, height=70, width=70, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
-    cls_btn = ft.TextButton(
-        content=ft.Container(
-            content=ft.Column(
-                [ft.Text(value="CLS", size=17)],
-                alignment=ft.MainAxisAlignment.CENTER
-            )
-        ),
-        data="e",on_click=text_enter, height=70, width=70, style=ft.ButtonStyle(bgcolor="#202429")
+    bckspace_btn = ft.IconButton(
+        icon=ft.icons.BACKSPACE_OUTLINED, on_click=text_enter, data="e", height=70, width=70, style=ft.ButtonStyle(bgcolor="#202429"), icon_color="#9ecaff"
     )
     
     left_pbtn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="(", size=17)],
+                [ft.Text(value="(", size=23)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -313,7 +417,7 @@ def main(page: ft.page):
     right_pbtn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value=")", size=17)],
+                [ft.Text(value=")", size=23)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
@@ -323,17 +427,21 @@ def main(page: ft.page):
     division_btn = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
-                [ft.Text(value="/", size=17)],
+                [ft.Text(value="÷", size=30)],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ),
         data="/",on_click=text_enter, height=70, width=70, style=ft.ButtonStyle(bgcolor="#202429")
     )
 
+    theme_btn = ft.IconButton(
+        icon=ft.icons.SUNNY, on_click=nightbtn_clicked, icon_color="#9ecaff"
+    )
+
     # Make rows for buttons and set aligment
 
     row1st = ft.Row(
-        controls=[cls_btn, left_pbtn, right_pbtn, division_btn],
+        controls=[left_pbtn, right_pbtn, division_btn, bckspace_btn],
         alignment=ft.MainAxisAlignment.SPACE_BETWEEN
     )
 
@@ -358,7 +466,7 @@ def main(page: ft.page):
     )
 
     # Add rows to main window
-    page.add(row1st, row2nd, row3rd, row4th, row5th)
+    page.add(theme_btn, row1st, row2nd, row3rd, row4th, row5th)
 
 # Start application from def main
 ft.app(target=main)
