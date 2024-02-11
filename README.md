@@ -5,7 +5,7 @@ Simple calculator based on **flet** for Windows and Android
 
 **Lastest Android 0.7.5 version**: https://github.com/ksh1vn/Flet-Calculator/releases/tag/android_0.7.5
 
-**Lastest Windows 0.9.5 version**: https://github.com/ksh1vn/Flet-Calculator/releases/tag/windows_0.9.5
+**Lastest Windows 0.9.6 version**: https://github.com/ksh1vn/Flet-Calculator/releases/tag/windows_0.9.6
 
 ## Screenshots:
 
@@ -16,4 +16,4 @@ Simple calculator based on **flet** for Windows and Android
 
 **Windows version**
 
-> ![Windows](https://github.com/ksh1vn/Flet-Calculator/assets/60093741/f01d3567-7459-4b58-81d0-3fa1da83568c)
+> ![Windows](https://github.com/ksh1vn/Flet-Calculator/assets/60093741/184488be-0e75-4f79-80dd-4b9a3d0a1683)
