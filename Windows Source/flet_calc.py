@@ -1,6 +1,6 @@
-# Flet Calculator by ksh1vn version 0.9.6
+# Flet Calculator by stakanyash (ksh1vn) version 0.9.7
 
-# TODO: Add support input from keyboard
+# Know issues: NumPad is not working
 
 # Libs import
 import flet as ft
@@ -39,7 +39,7 @@ system_lang = locale.getdefaultlocale()[0][:2]
 lang = translations.get(system_lang, translations["en"])
 
 # Create page
-def main(page: ft.page):
+def main(page: ft.Page):
     page.title = lang["title"]
     page.description = lang["title"]
     page.window_height = 615
@@ -47,6 +47,159 @@ def main(page: ft.page):
     page.theme_mode = "dark"
     page.window_resizable = False
     page.window_maximizable = False
+
+    # Add dialog_open variable to track if a dialog is open
+    global dialog_open
+    dialog_open = False
+
+    # Zero division error alert          
+    def close_dlgzero(e):
+        global dialog_open
+        divzero_error.open = False
+        dialog_open = False  # Close dialog state
+        page.update()
+
+    divzero_error = ft.AlertDialog(
+        modal=True,
+        title=ft.Text(lang["error"]),
+        content=ft.Text(lang["division_by_zero"]),
+        actions=[
+            ft.TextButton("OK", on_click=close_dlgzero)
+        ],
+        actions_alignment=ft.MainAxisAlignment.END,
+        on_dismiss=lambda e: print(lang["zero_print"]),
+    )
+
+    # Name error alert          
+    def close_dlgname(e):
+        global dialog_open
+        name_error.open = False
+        dialog_open = False  # Close dialog state
+        page.update()
+
+    name_error = ft.AlertDialog(
+        modal=True,
+        title=ft.Text(lang["error"]),
+        content=ft.Text(lang["name_error"]),
+        actions=[
+            ft.TextButton("OK", on_click=close_dlgname)
+        ],
+        actions_alignment=ft.MainAxisAlignment.END,
+        on_dismiss=lambda e: print(lang["name_print"]),
+    )
+
+    # Syntax error alert
+    def close_dlgsyntax(e):
+        global dialog_open
+        syntax_error.open = False
+        dialog_open = False  # Close dialog state
+        page.update()
+
+    syntax_error = ft.AlertDialog(
+        modal=True,
+        title=ft.Text(lang["error"]),
+        content=ft.Text(lang["syntax_error"]),
+        actions=[
+            ft.TextButton("OK", on_click=close_dlgsyntax)
+        ],
+        actions_alignment=ft.MainAxisAlignment.END,
+        on_dismiss=lambda e: print(lang["syntax_print"]),
+    )
+
+    # Index error alert
+    def close_dlgindex(e):
+        global dialog_open
+        index_error.open = False
+        dialog_open = False  # Close dialog state
+        page.update()
+
+    index_error = ft.AlertDialog(
+        modal=True,
+        title=ft.Text(lang["error"]),
+        content=ft.Text(lang["index_error"]),
+        actions=[
+            ft.TextButton("OK", on_click=close_dlgindex)
+        ],
+        actions_alignment=ft.MainAxisAlignment.END,
+        on_dismiss=lambda e: print(lang["index_print"]),
+    )
+
+    def handle_key_event(e):
+        key = e.key
+
+        # Закрытие диалоговых окон по Enter
+        if key == "Enter":
+            if divzero_error.open:
+                close_dlgzero(e)
+                return
+            elif name_error.open:
+                close_dlgname(e)
+                return
+            elif syntax_error.open:
+                close_dlgsyntax(e)
+                return
+            elif index_error.open:
+                close_dlgindex(e)
+                return
+
+        # Поддержка основных клавиш и клавиш NumPad
+        if key in ["0", "Numpad0"]:
+            mainfield.value += "0"
+        elif key in ["1", "Numpad1"]:
+            mainfield.value += "1"
+        elif key in ["2", "Numpad2"]:
+            mainfield.value += "2"
+        elif key in ["3", "Numpad3"]:
+            mainfield.value += "3"
+        elif key in ["4", "Numpad4"]:
+            mainfield.value += "4"
+        elif key in ["5", "Numpad5"]:
+            mainfield.value += "5"
+        elif key in ["6", "Numpad6"]:
+            mainfield.value += "6"
+        elif key in ["7", "Numpad7"]:
+            mainfield.value += "7"
+        elif key in ["8", "Numpad8"]:
+            mainfield.value += "8"
+        elif key in ["9", "Numpad9"]:
+            mainfield.value += "9"
+        elif key in [".", "NumpadDecimal"]:
+            mainfield.value += "."
+        elif key in ["+", "NumpadAdd"]:
+            mainfield.value += "+"
+        elif key in ["-", "NumpadSubtract"]:
+            mainfield.value += "-"
+        elif key in ["*", "NumpadMultiply"]:
+            mainfield.value += "*"
+        elif key in ["/", "NumpadDivide"]:
+            mainfield.value += "/"
+        elif key == "Backspace":
+            mainfield.value = mainfield.value[:-1]
+        elif key == "Enter":
+            try:
+                mainfield.value = str(eval(mainfield.value))
+            except ZeroDivisionError:
+                page.dialog = divzero_error
+                divzero_error.open = True
+                mainfield.value = ""
+                page.update() 
+            except SyntaxError:
+                page.dialog = syntax_error
+                syntax_error.open = True
+                mainfield.value = ""
+                page.update()
+            except NameError:
+                page.dialog = name_error
+                name_error.open = True
+                mainfield.value = ""
+                page.update()
+        elif key == "Escape":  # Очистка ввода
+            mainfield.value = ""
+    
+        page.update()
+
+    # Connect keyboard event handler
+    page.on_keyboard_event = handle_key_event
 
     def nightbtn_clicked(e):
         # Change theme
@@ -141,70 +294,6 @@ def main(page: ft.page):
         if data in ["1","2","3","4","5","6","7","8","9","0",".","+","-","*","/","(",")"]:
             mainfield.value = str(mainfield.value) + str(data)
             page.update()
-
-     # Zero division error alert          
-        def close_dlgzero(e):
-            divzero_error.open = False
-            page.update()
-
-        divzero_error = ft.AlertDialog(
-            modal=True,
-            title=ft.Text(lang["error"]),
-            content=ft.Text(lang["division_by_zero"]),
-            actions=[
-                ft.TextButton("OK", on_click=close_dlgzero)
-            ],
-            actions_alignment=ft.MainAxisAlignment.END,
-            on_dismiss=lambda e: print(lang["zero_print"]),
-        )
-
-    # Name division error alert          
-        def close_dlgname(e):
-            name_error.open = False
-            page.update()
-
-        name_error = ft.AlertDialog(
-            modal=True,
-            title=ft.Text(lang["error"]),
-            content=ft.Text(lang["name_error"]),
-            actions=[
-                ft.TextButton("OK", on_click=close_dlgname)
-            ],
-            actions_alignment=ft.MainAxisAlignment.END,
-            on_dismiss=lambda e: print(lang["name_print"]),
-        )
-
-    # Syntax error alert
-        def close_dlgsyntax(e):
-            syntax_error.open = False
-            page.update()
-
-        syntax_error = ft.AlertDialog(
-            modal=True,
-            title=ft.Text(lang["error"]),
-            content=ft.Text(lang["syntax_error"]),
-            actions=[
-                ft.TextButton("OK", on_click=close_dlgsyntax)
-            ],
-            actions_alignment=ft.MainAxisAlignment.END,
-            on_dismiss=lambda e: print(lang["syntax_print"]),
-        )
-
-    # Index error alert
-        def close_dlgindex(e):
-            index_error.open = False
-            page.update()
-
-        index_error = ft.AlertDialog(
-            modal=True,
-            title=ft.Text(lang["error"]),
-            content=ft.Text(lang["index_error"]),
-            actions=[
-                ft.TextButton("OK", on_click=close_dlgindex)
-            ],
-            actions_alignment=ft.MainAxisAlignment.END,
-            on_dismiss=lambda e: print(lang["index_print"]),
-        )
 
     # Equal button functional
         if data =="=":
