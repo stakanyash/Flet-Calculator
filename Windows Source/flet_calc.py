@@ -3,19 +3,50 @@
 # TODO: Add support input from keyboard
 
 # Libs import
-
 import flet as ft
+import locale
 
+# Localization list
+translations = {
+    "en": {
+        "title": "Flet Calculator",
+        "error": "Error",
+        "division_by_zero": "Division by zero!",
+        "syntax_error": "Syntax error!",
+        "name_error": "Name error!",
+        "index_error": "Index error!",
+        "zero_print": "Division by zero error has occurred",
+        "name_print": "Name error has occurred",
+        "syntax_print": "Syntax error has occurred",
+        "index_print": "Index error has occurred"
+    },
+    "ru": {
+        "title": "Калькулятор Flet",
+        "error": "Ошибка",
+        "division_by_zero": "Деление на ноль!",
+        "syntax_error": "Синтаксическая ошибка!",
+        "name_error": "Ошибка имени!",
+        "index_error": "Ошибка индекса!",
+        "zero_print": "Случилась ошибка деления на ноль",
+        "name_print": "Случилась ошибка имени",
+        "syntax_print": "Случилась ошибка синтаксиса",
+        "index_print": "Случилась ошибка индекса"
+    }
+}
+
+# Detect system language
+system_lang = locale.getdefaultlocale()[0][:2]
+lang = translations.get(system_lang, translations["en"])
 
 # Create page
-
 def main(page: ft.page):
-    page.title = "Flet Calculator"
-    page.description = "Flet Calculator"
+    page.title = lang["title"]
+    page.description = lang["title"]
     page.window_height = 615
     page.window_width = 340
     page.theme_mode = "dark"
     page.window_resizable = False
+    page.window_maximizable = False
 
     def nightbtn_clicked(e):
         # Change theme
@@ -101,11 +132,9 @@ def main(page: ft.page):
             button.content = create_text_container(value, size, color_dict[page.theme_mode])
 
         # Update page
- 
         page.update()
 
     # Make buttons functional
-
     def text_enter(e):
         data = e.control.data
 
@@ -113,76 +142,71 @@ def main(page: ft.page):
             mainfield.value = str(mainfield.value) + str(data)
             page.update()
 
-     # Zero division error alert
-            
+     # Zero division error alert          
         def close_dlgzero(e):
             divzero_error.open = False
             page.update()
 
         divzero_error = ft.AlertDialog(
             modal=True,
-            title=ft.Text("Error"),
-            content=ft.Text("Division by zero!"),
+            title=ft.Text(lang["error"]),
+            content=ft.Text(lang["division_by_zero"]),
             actions=[
                 ft.TextButton("OK", on_click=close_dlgzero)
             ],
             actions_alignment=ft.MainAxisAlignment.END,
-            on_dismiss=lambda e: print("Division by zero error has occurred"),
+            on_dismiss=lambda e: print(lang["zero_print"]),
         )
 
-    # Zero division error alert
-            
+    # Name division error alert          
         def close_dlgname(e):
             name_error.open = False
             page.update()
 
         name_error = ft.AlertDialog(
             modal=True,
-            title=ft.Text("Error"),
-            content=ft.Text("Name error!"),
+            title=ft.Text(lang["error"]),
+            content=ft.Text(lang["name_error"]),
             actions=[
                 ft.TextButton("OK", on_click=close_dlgname)
             ],
             actions_alignment=ft.MainAxisAlignment.END,
-            on_dismiss=lambda e: print("Name error has occurred"),
+            on_dismiss=lambda e: print(lang["name_print"]),
         )
 
     # Syntax error alert
-
         def close_dlgsyntax(e):
             syntax_error.open = False
             page.update()
 
         syntax_error = ft.AlertDialog(
             modal=True,
-            title=ft.Text("Error"),
-            content=ft.Text("Syntax error!"),
+            title=ft.Text(lang["error"]),
+            content=ft.Text(lang["syntax_error"]),
             actions=[
                 ft.TextButton("OK", on_click=close_dlgsyntax)
             ],
             actions_alignment=ft.MainAxisAlignment.END,
-            on_dismiss=lambda e: print("Syntax error has occurred"),
+            on_dismiss=lambda e: print(lang["syntax_print"]),
         )
 
     # Index error alert
-
         def close_dlgindex(e):
             index_error.open = False
             page.update()
 
         index_error = ft.AlertDialog(
             modal=True,
-            title=ft.Text("Error"),
-            content=ft.Text("Index error!"),
+            title=ft.Text(lang["error"]),
+            content=ft.Text(lang["index_error"]),
             actions=[
                 ft.TextButton("OK", on_click=close_dlgindex)
             ],
             actions_alignment=ft.MainAxisAlignment.END,
-            on_dismiss=lambda e: print("Index error has occurred"),
+            on_dismiss=lambda e: print(lang["index_print"]),
         )
 
     # Equal button functional
-
         if data =="=":
             try:
                 mainfield.value = str(eval(mainfield.value))
@@ -204,7 +228,6 @@ def main(page: ft.page):
             page.update()
 
     # CLS button functional
-
         if data=="e":
             try:
                 st = list(mainfield.value)
@@ -218,13 +241,11 @@ def main(page: ft.page):
             page.update()
 
     # Clear button functional
-
         if data=="C":
             mainfield.value = ""
             page.update()
 
     # Create text field, set read-only, color and size
-
     mainfield = ft.TextField(
         read_only = True,
         border = ft.InputBorder.NONE,
@@ -235,11 +256,9 @@ def main(page: ft.page):
     )
 
     # Add text field to main window
-
     page.add(mainfield)
 
-     # Buttons
-
+    # Buttons
     clear_button = ft.TextButton(
         content=ft.Container(
             content=ft.Column(
@@ -439,7 +458,6 @@ def main(page: ft.page):
     )
 
     # Make rows for buttons and set aligment
-
     row1st = ft.Row(
         controls=[left_pbtn, right_pbtn, division_btn, bckspace_btn],
         alignment=ft.MainAxisAlignment.SPACE_BETWEEN
